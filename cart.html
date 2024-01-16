@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #cart-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;  /* Adjust the padding as needed */
+            text-align: center;
+            max-width: 300px;  /* Adjust the max-width as needed */
+            margin: auto;  /* Center the container */
+        }
+
+        #product-image {
+            max-width: 200px;  /* Adjust the max-width as needed */
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        #product-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #product-description {
+            margin-bottom: 15px;
+        }
+
+        #product-price {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .CartBtn, .container {
+            width: 140px;
+            height: 40px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition-duration: .5s;
+            overflow: hidden;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
+            position: relative;
+        }
+
+        .CartBtn {
+            background-color: rgb(255, 208, 0);
+            color: rgb(17, 17, 17);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .IconContainer {
+            position: absolute;
+            left: -50px;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+            transition-duration: .5s;
+        }
+
+        .icon {
+            border-radius: 1px;
+        }
+
+        .text {
+            height: 100%;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            transition-duration: .5s;
+            font-size: 1.04em;
+            font-weight: 600;
+        }
+
+        .CartBtn:hover .IconContainer {
+            transform: translateX(58px);
+            border-radius: 40px;
+            transition-duration: .5s;
+        }
+
+        .CartBtn:hover .text {
+            transform: translate(10px, 0px);
+            transition-duration: .5s;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 6em;
+            height: 6em;
+            border: none;
+            border-radius: 1em;
+            background: #ddd;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .4);
+            cursor: pointer;
+          }
+          
+          .heart {
+            width: 2.4em;
+            height: 4.3em;
+            border: none;
+            border-radius: 10em;
+            pointer-events: none;
+          }
+          
+          .heart_left {
+            background-color: rgb(252, 102, 56);
+            box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+            transform: rotate(-38deg);
+            margin-right: -16px;
+            z-index: 2;
+          }
+          
+          .heart_right {
+            background-color: rgb(199, 81, 45);
+            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+            transform: rotate(38deg);
+            z-index: 1;
+          }
+          
+          .container:hover > .heart_left {
+            animation: like 450ms ease forwards;
+          }
+          
+          @keyframes like {
+            0% {
+              margin-right: -16px;
+            }
+          
+            25% {
+              transform: rotate(0deg);
+              margin-right: -32px;
+            }
+          
+            50% {
+              transform: rotate(-38deg);
+              margin-right: -16px;
+            }
+          
+            75% {
+              transform: rotate(0deg);
+              margin-right: -32px;
+            }
+          
+            100% {
+              transform: rotate(-38deg);
+            }
+          }
+          
+          .container:hover > .heart_right {
+            animation: loke 450ms ease;
+          }
+          
+          @keyframes loke {
+            25% {
+              transform: rotate(0deg);
+              box-shadow: none;
+            }
+          
+            50% {
+              transform: rotate(38deg);
+            }
+          
+            75% {
+              transform: rotate(0deg);
+            }
+          
+            100% {
+              transform: rotate(38deg);
+            }
+          }
+          
+          .orange_effect,
+          .white_effect {
+            position: absolute;
+            inset: 40.5%;
+            border: none;
+            border-radius: .2em;
+            width: 1em;
+            height: 1em;
+            scale: 1;
+            opacity: 1;
+          }
+          
+          .orange_effect {
+            background: rgba(255, 102, 55, .3);
+            transition: scale 250ms linear, opacity 500ms linear 270ms;
+          }
+          
+          .container:hover > .orange_effect {
+            scale: 6;
+            opacity: 0;
+          }
+          
+          .white_effect {
+            background: rgba(255, 134, 42, 0.3);
+            transition: scale 280ms linear 200ms, opacity 500ms linear 270ms;
+          }
+          
+          .container:hover > .white_effect {
+            scale: 6;
+            opacity: 0;
+          }
+          
+          .like {
+        
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 10em;
+            min-height: 2.2em;
+            background: #e5e5e5;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+            font-size: 15px;
+            letter-spacing: 3px;
+            border: none;
+            border-radius: .65em;
+            pointer-events: none;
+            scale: 0;
+            opacity: 0;
+          }
+          
+          .container:focus .like {
+            animation: pop-up 400ms ease forwards;
+          }
+          
+          @keyframes pop-up {
+            0% {
+              top: 0;
+            }
+          
+            80%, 100% {
+              top: -60px;
+              scale: 1;
+              opacity: 1;
+            }
+          }
+    </style>
+</head>
+<body>
+    <div id="cart-container">
+        <img id="product-image" src="https://i.pinimg.com/564x/30/bb/37/30bb378d9d500c2b55de5a274f022e17.jpg" alt="Product Image">
+        <div id="product-name">Men Brown Corduroy Gurkha Trouser </div>
+        <div id="product-description">Men Brown Corduroy Gurkha Trouser Bespoke High Waist Regular Fit Double Pleated Buckle Closure With Bottom Cuff Military Style 1960s Pants</div>
+        <div id="product-price">$99.99</div>
+        <div class="button-container">
+            <button class="CartBtn">
+                <span class="IconContainer"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                    </svg>
+                </span>
+                <p class="text">Add to Cart</p>
+            </button>
+           <button class="container">
+    <span class="effect orange_effect"></span>
+    <span class="effect white_effect"></span>
+    <div class="heart heart_left"></div>
+    <div class="heart heart_right"></div>
+    <div class="like">I love it</div>
+  </button>
+        </div>
+    </div>
+</body>
+</html>
